@@ -173,6 +173,7 @@ def demo_nan_detection():
 
     optimizer.zero_grad()
     output = model(x)
+    output = output / 0
     loss = criterion(output, target)
     loss.backward()
     print(f"  Normal loss: {loss.item():.4f}")
