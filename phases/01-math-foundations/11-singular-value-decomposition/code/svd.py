@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def power_iteration(M, num_iters=200, tol=1e-10):
     n = M.shape[1]
     v = np.random.randn(n)
