@@ -15,9 +15,9 @@ class NearestCentroid:
     def predict(self, X):
         distances = np.array([
             np.sqrt(((X - c) ** 2).sum(axis=1))
-            for c in self.centroids
+            for c in self.centroids # type: ignore
         ])
-        return self.classes[distances.argmin(axis=0)]
+        return self.classes[distances.argmin(axis=0)] # pyright: ignore[reportOptionalSubscript]
 
     def score(self, X, y):
         return np.mean(self.predict(X) == y)
@@ -77,9 +77,9 @@ def demo_nearest_centroid():
     train_acc = clf.score(X_train, y_train)
     test_acc = clf.score(X_test, y_test)
 
-    print(f"Centroids:")
-    for i, c in enumerate(clf.classes):
-        print(f"  Class {c}: [{clf.centroids[i][0]:.3f}, {clf.centroids[i][1]:.3f}]")
+    print(f"Centroids:")  # noqa: F541
+    for i, c in enumerate(clf.classes): # type: ignore
+        print(f"  Class {c}: [{clf.centroids[i][0]:.3f}, {clf.centroids[i][1]:.3f}]") # type: ignore
     print()
 
     print(f"{'Method':<25} {'Train Acc':>10} {'Test Acc':>10}")
@@ -180,8 +180,8 @@ def demo_multiclass():
 
     print(f"3-class problem: {len(y)} samples")
     print(f"Centroids:")
-    for i, c in enumerate(clf.classes):
-        print(f"  Class {c}: [{clf.centroids[i][0]:.3f}, {clf.centroids[i][1]:.3f}]")
+    for i, c in enumerate(clf.classes): # type: ignore
+        print(f"  Class {c}: [{clf.centroids[i][0]:.3f}, {clf.centroids[i][1]:.3f}]") # type: ignore
     print()
     print(f"Test accuracy: {clf.score(X_test, y_test):.3f}")
     print(f"Random baseline (1/3): {random_baseline(y_train, y_test):.3f}")
